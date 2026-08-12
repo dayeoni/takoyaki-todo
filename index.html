@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>타코야끼 투두</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="app-root">
+
+  <div class="widget-wrap">
+
+    <!-- 위젯 바깥 상단 애니메이션 레이어 -->
+    <div class="anim-layer" aria-hidden="true">
+      <div class="roll-item roll-item--1 takoyaki-icon"></div>
+      <div class="roll-item roll-item--2 takoyaki-icon"></div>
+      <div class="roll-item roll-item--3 takoyaki-icon"></div>
+      <div class="jump-item jump-item--1 takoyaki-icon"></div>
+      <div class="jump-item jump-item--2 takoyaki-icon"></div>
+      <div class="jump-item jump-item--3 takoyaki-icon"></div>
+      <div class="jump-item jump-item--4 takoyaki-icon"></div>
+    </div>
+
+  <main class="tako-card" data-animation="none">
+
+    <!-- 헤더: 날짜 네비게이션 + 애니메이션 선택 -->
+    <header class="widget-header">
+      <div class="date-nav">
+        <button type="button" id="prevDayBtn" class="icon-btn" aria-label="이전 날">‹</button>
+        <button type="button" id="dateLabelBtn" class="date-label" aria-label="날짜 선택">
+          <span id="dateLabelText">오늘</span>
+        </button>
+        <button type="button" id="nextDayBtn" class="icon-btn" aria-label="다음 날">›</button>
+      </div>
+      <button type="button" id="animCycleBtn" class="anim-cycle-btn" aria-label="상단 애니메이션 전환 (없음 → 굴러가기 → 통통 튀기)"></button>
+
+      <div id="calendarPopover" class="calendar-popover" hidden>
+        <div class="calendar-popover-header">
+          <button type="button" id="calPrevMonth" class="icon-btn" aria-label="이전 달">‹</button>
+          <span id="calMonthLabel"></span>
+          <button type="button" id="calNextMonth" class="icon-btn" aria-label="다음 달">›</button>
+        </div>
+        <div class="calendar-weekdays">
+          <span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
+        </div>
+        <div id="calGrid" class="calendar-grid"></div>
+      </div>
+    </header>
+
+    <!-- 할일 리스트 -->
+    <section class="todo-section">
+      <div id="completeBanner" class="complete-banner" hidden>
+        <span class="complete-banner-icon"></span>
+        <p class="complete-banner-text">오늘의 타코야끼 완성!</p>
+      </div>
+      <ul id="todoList" class="todo-list"></ul>
+      <div id="emptyState" class="empty-state" hidden>
+        <img src="assets/tako-octopus.png" alt="할일 없음" class="empty-state-img" />
+      </div>
+    </section>
+
+    <!-- 새 할일 추가 -->
+    <form id="addForm" class="add-form">
+      <input
+        type="text"
+        id="addInput"
+        class="add-input"
+        placeholder="오늘의 할일을 입력하타코"
+        maxlength="200"
+        autocomplete="off"
+      />
+      <button type="submit" class="add-btn" aria-label="할일 추가">+</button>
+    </form>
+
+  </main>
+
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

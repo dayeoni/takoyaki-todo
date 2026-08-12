@@ -1,0 +1,452 @@
+/* 교보손글씨 2025 폰트 */
+@font-face {
+  font-family: "KyoboHandwriting2019";
+  src: url("assets/fonts/KyoboHandwriting2025lyb.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --color-bg: #fff3e0;
+  --color-widget-bg: #fdecb2;
+  --color-takoyaki: #d99a53;
+  --color-takoyaki-dark: #a86b32;
+  --color-sauce: #6b3a1f;
+  --color-mayo: #fff8e7;
+  --color-bonito: #e0a94f;
+  --color-accent: #e8734a;
+  --color-text: #4a2f1c;
+  --color-text-muted: #9c8168;
+
+  --img-widget-bg: url("assets/background.png");
+  --img-takoyaki: url("assets/takoyaki.png");
+  --img-takoyaki-done: url("assets/takoyaki-with-stick.png");
+  --img-complete-box: url("assets/takoyaki-box.png");
+
+  --widget-width: 340px;
+  --radius-lg: 22px;
+  --radius-md: 14px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+body {
+  margin: 0;
+}
+
+.app-root {
+  min-height: 100vh;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  font-family: "KyoboHandwriting2019", "Apple SD Gothic Neo", "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--color-text);
+  padding: 24px;
+}
+
+/* =========================================================
+   위젯 카드
+   ========================================================= */
+.widget-wrap {
+  position: relative;
+  z-index: 1;
+  width: var(--widget-width);
+}
+
+.tako-card {
+  position: relative;
+  width: 100%;
+  background: var(--color-widget-bg) var(--img-widget-bg) top center / 100% auto no-repeat;
+  border: 3px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 10px 30px rgba(168, 107, 50, 0.18);
+  padding: 18px 16px 16px;
+  overflow: hidden;
+}
+
+/* =========================================================
+   상단 애니메이션 레이어 (위젯 바깥, 위쪽)
+   ========================================================= */
+.anim-layer {
+  position: absolute;
+  left: 0;
+  bottom: 100%;
+  width: 100%;
+  height: 28px;
+  margin-bottom: 6px;
+  pointer-events: none;
+}
+
+.takoyaki-icon {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--img-takoyaki) center / cover no-repeat;
+  filter: drop-shadow(0 3px 3px rgba(168, 107, 50, 0.3));
+}
+
+.roll-item {
+  top: 3px;
+  left: -24px;
+  display: none;
+}
+.jump-item {
+  top: 4px;
+  display: none;
+}
+.jump-item--1 {
+  left: 8px;
+}
+.jump-item--2 {
+  left: 28px;
+}
+.jump-item--3 {
+  left: 48px;
+}
+.jump-item--4 {
+  left: 68px;
+}
+
+/* none: 아무 것도 표시 안 함 (기본값) */
+.widget-wrap[data-animation="rolling"] .roll-item {
+  display: block;
+  animation: roll 6.5s linear infinite;
+}
+/* 음수 delay: 이미 그만큼 재생 중인 상태로 시작 → 대기 없이 바로 제자리에서 출발 */
+.widget-wrap[data-animation="rolling"] .roll-item--2 {
+  animation-delay: -2.1667s;
+}
+.widget-wrap[data-animation="rolling"] .roll-item--3 {
+  animation-delay: -4.3333s;
+}
+.widget-wrap[data-animation="jumping"] .jump-item {
+  display: block;
+  animation: jump 1.5s ease-in-out infinite;
+}
+.widget-wrap[data-animation="jumping"] .jump-item--2 {
+  animation-delay: -0.375s;
+}
+.widget-wrap[data-animation="jumping"] .jump-item--3 {
+  animation-delay: -0.75s;
+}
+.widget-wrap[data-animation="jumping"] .jump-item--4 {
+  animation-delay: -1.125s;
+}
+
+
+@keyframes roll {
+  0% {
+    transform: translateX(0) rotate(0deg);
+  }
+  100% {
+    transform: translateX(calc(var(--widget-width) + 24px)) rotate(720deg);
+  }
+}
+
+@keyframes jump {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+/* =========================================================
+   헤더 / 날짜 네비게이션
+   ========================================================= */
+.widget-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 34px;
+  margin-bottom: 14px;
+  position: relative;
+  z-index: 1;
+}
+
+.date-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.icon-btn {
+  width: 26px;
+  height: 26px;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-border);
+  color: var(--color-text);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+}
+.icon-btn:hover {
+  background: var(--color-takoyaki);
+  color: #fff;
+}
+
+.date-label {
+  border: none;
+  background: none;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--color-text);
+  cursor: pointer;
+  padding: 2px 4px;
+}
+
+.calendar-popover {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 10;
+  width: 220px;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 8px 20px rgba(168, 107, 50, 0.25);
+  padding: 10px;
+}
+.calendar-popover[hidden] {
+  display: none;
+}
+
+.calendar-popover-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.calendar-weekdays,
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  text-align: center;
+}
+
+.calendar-weekdays {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  margin-bottom: 4px;
+}
+
+.calendar-day {
+  border: none;
+  background: none;
+  padding: 5px 0;
+  font-size: 12px;
+  font-family: inherit;
+  border-radius: 6px;
+  cursor: pointer;
+  color: var(--color-text);
+}
+.calendar-day:hover {
+  background: var(--color-border);
+}
+.calendar-day.is-muted {
+  color: var(--color-text-muted);
+  opacity: 0.5;
+}
+.calendar-day.is-today {
+  font-weight: 700;
+  color: var(--color-accent);
+}
+.calendar-day.is-selected {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.anim-cycle-btn {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background: var(--img-takoyaki) center / cover no-repeat;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.anim-cycle-btn:hover {
+  transform: scale(1.08);
+}
+.anim-cycle-btn[data-animation="rolling"],
+.anim-cycle-btn[data-animation="jumping"] {
+  box-shadow: 0 0 0 2px var(--color-accent);
+}
+
+/* =========================================================
+   할일 리스트
+   ========================================================= */
+.todo-section {
+  height: 196px;
+  overflow-y: auto;
+}
+
+.complete-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 0 16px;
+}
+.complete-banner[hidden] {
+  display: none;
+}
+.complete-banner-icon {
+  width: 160px;
+  height: 160px;
+  background: var(--img-complete-box) center / contain no-repeat;
+}
+.complete-banner-text {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+.todo-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 8px 10px;
+}
+
+.todo-item.done .todo-text {
+  text-decoration: line-through;
+  color: var(--color-text-muted);
+}
+
+/* 체크박스: 타코야끼 모양 */
+.check-takoyaki {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  background: var(--img-takoyaki-done) center / cover no-repeat;
+  position: relative;
+}
+
+.todo-item.done .check-takoyaki {
+  background: var(--img-takoyaki-done) center / cover no-repeat;
+}
+
+
+.todo-text {
+  flex: 1;
+  font-size: 14px;
+  word-break: break-all;
+  cursor: text;
+}
+
+.todo-edit-input {
+  flex: 1;
+  font-size: 14px;
+  font-family: inherit;
+  border: 1px solid var(--color-accent);
+  border-radius: 8px;
+  padding: 4px 6px;
+}
+.todo-edit-input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.todo-delete-btn {
+  flex: none;
+  border: none;
+  background: none;
+  color: var(--color-text-muted);
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px;
+}
+.todo-delete-btn:hover {
+  color: var(--color-accent);
+}
+
+.empty-state {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.empty-state[hidden] {
+  display: none;
+}
+
+.empty-state-img {
+  width: 120px;
+  height: auto;
+}
+
+/* =========================================================
+   할일 추가 폼
+   ========================================================= */
+.add-form {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.add-input {
+  flex: 1;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 9px 12px;
+  font-size: 14px;
+  font-family: inherit;
+}
+.add-input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.add-btn {
+  flex: none;
+  width: 38px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+}
+.add-btn:hover {
+  filter: brightness(1.05);
+}
