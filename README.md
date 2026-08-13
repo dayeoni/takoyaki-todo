@@ -62,4 +62,4 @@ brew install --cask ubersicht
 
 ## 재료 원산지
 
-폰트는 [교보손글씨 2019](https://noonnu.cc/font_page/419) (웹 임베딩 허용 범위 내 사용)
+폰트는 [교보손글씨 2025 이유빈](https://store.kyobobook.co.kr/handwriting/font) (웹 임베딩 허용 범위 내 사용)
