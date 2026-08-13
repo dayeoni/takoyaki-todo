@@ -60,6 +60,16 @@ brew install --cask ubersicht
 
 > ⚠️ Übersicht는 화면 전체 마우스 클릭을 붙잡는 구조라, macOS 기본 데스크탑 위젯(리마인더 등)이랑 같이 쓰면 그쪽이 안 눌릴 수 있타코. 필요할 때만 켰다 끄는 걸 추천!
 
+## 완성됐타코
+<p align="center">
+  <img width="270" alt="image" src="https://github.com/user-attachments/assets/0fdbbbca-42fb-4ef6-98b5-92b3c42c0dde" />
+  <img width="270" alt="image" src="https://github.com/user-attachments/assets/aa175748-cb95-4c85-82bd-c32a8860380d" />
+  <img width="270" alt="image" src="https://github.com/user-attachments/assets/f8170244-4df6-4ce3-b101-09b3bce2cd7e" />
+</p>
+
+
+
+
 ## 재료 원산지
 
 폰트는 [교보손글씨 2025 이유빈](https://store.kyobobook.co.kr/handwriting/font) (웹 임베딩 허용 범위 내 사용)
